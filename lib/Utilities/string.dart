@@ -5,6 +5,7 @@ class Strings{
   static const String hirschberg = '眼位檢查';
   static const String reviewingProfile = '检视档案';
   static const String register = '建立档案';
+  static const String eyePressure = '眼压检查';
 
   static const String leaveAppQuestion = '是否确定离开APP?';
   static const String leavingAlertQuestion = '数据尚未储存\n是否确定离开?';

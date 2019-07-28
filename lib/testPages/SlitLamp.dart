@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:http/http.dart';
 import 'package:myapp/Utilities/Functions.dart';
 import 'package:myapp/Utilities/string.dart';
@@ -44,15 +45,19 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
   // e.g. formOtherController['眼臉左'] will return the text field controller inside the alert window
   //       the alert window only shows up when '其他' is pressed
   Map<String, TextEditingController> formOtherController;
-  Map<String, TextEditingController> formCenterAxisController;
-  Map<String, TextEditingController> formNearAxisController;
+  TextEditingController leftCenterAxisController;
+  TextEditingController leftNearAxisController;
+  TextEditingController rightCenterAxisController;
+  TextEditingController rightNearAxisController;
 
   // map storing the value of '其他'
   // e.g. in alert window, user typed '盲了' in text field and confirm
   //       then, otherValue['眼臉左'] = '盲了'
   Map<String, String> otherValue;
-  Map<String, String> centerAxisValue;
-  Map<String, String> nearAxisValue;
+  String leftCenterAxisValue;
+  String leftNearAxisValue;
+  String rightCenterAxisValue;
+  String rightNearAxisValue;
 
   /// define back press action
   Future<bool> Function(BuildContext) backPressed = (BuildContext context) => Functions.onBackPressedAlert(
@@ -67,11 +72,15 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
 
     radioValue = Map();
     formOtherController = Map();
-    formCenterAxisController = Map();
-    formNearAxisController = Map();
+    leftCenterAxisController = TextEditingController();
+    leftNearAxisController = TextEditingController();
+    rightCenterAxisController = TextEditingController();
+    rightNearAxisController = TextEditingController();
     otherValue = Map();
-    centerAxisValue = Map();
-    nearAxisValue = Map();
+    leftCenterAxisValue = '';
+    leftNearAxisValue = '';
+    rightCenterAxisValue = '';
+    rightNearAxisValue = '';
     super.initState();
   }
 
@@ -166,7 +175,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                     Center(child: Text(
                       Strings.slit_chamber, style: TextStyle(fontSize: Constants.normalFontSize + 5),
                     ),),
-                    leftRightChoiceButtonList(Strings.slit_chamber, Constants.chamber)
+                    chamberButtonList(Constants.chamber)
                     
 
                   ],
@@ -265,10 +274,12 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                 right_slit_chamber: getData(Strings.slit_chamber+Strings.right),
                 slit_exchange: getData(Strings.slit_exchange),
                 slit_eyeballshivering: getData(Strings.slit_eyeballshivering),
-                left_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.left),
-                left_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.left),
-                right_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.right),
-                right_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.left),
+                /*
+                left_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.left, chamber_center: true),
+                left_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.left, chamber_near: true),
+                right_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.right, chamber_center: true),
+                right_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.right, chamber_near: true),
+                */
             );
             SlitlampTest newData = await createSlitLampTest(widget.profileID, newslitlampTest.toMap()).timeout(const Duration(seconds: 10), onTimeout: (){ return null; });
 
@@ -309,7 +320,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
   /// BELOW IS THE SAME WITH OLD SLIP LAMP-----------------------------------------------
 
   // Decide to get data from othervalue or radiovalue
-  String getData(String key, {bool chamber_extra = false}){
+  String getData(String key){
     String result;
     if (otherValue[key] != null && otherValue[key] != '') {
       result = otherValue[key];
@@ -327,8 +338,6 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
   Widget radioButtons(List<String> choices, String key){
     List<Widget> buttons = []; // temp. store the widgets need to create inside the row
     if(formOtherController[key] == null) formOtherController[key] = new TextEditingController();
-    if(formCenterAxisController[key] == null) formCenterAxisController[key] = new TextEditingController();
-    if(formNearAxisController[key] == null) formNearAxisController[key] = new TextEditingController();
     if(radioValue[key] == null) radioValue[key] = '';
 
     for(String choice in choices){
@@ -373,84 +382,6 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                                 onPressed: () {
                                   // clear the controller if the user say cancel
                                   formOtherController[key].text = '';
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          )
-                      );
-                    }
-                    else if(choice == Strings.choice_centerAxis && radioValue[key] != choice){
-                      // show an alert window here to collect information
-                      showDialog(context: context, builder: (context) =>
-                          AlertDialog(
-                            title: Text(key + choice + Strings.slit_Axis_alert),
-                            content: TextField(
-                              controller: formCenterAxisController[key],
-                            ),
-                            actions: <Widget>[
-                              // confirm button
-                              FlatButton(
-                                child: Text(Strings.confirm),
-                                onPressed: (){
-                                  // save the string to centerAxisValue
-                                  centerAxisValue[key] = formCenterAxisController[key].text;
-
-                                  // set states
-                                  if (radioValue[key] != choice)
-                                    radioValue[key] = choice;
-                                  else
-                                    radioValue[key] = "";
-
-                                  setState(() {});
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              // cancel button
-                              FlatButton(
-                                child: Text(Strings.cancel),
-                                onPressed: () {
-                                  // clear the controller if the user say cancel
-                                  formCenterAxisController[key].text = '';
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          )
-                      );
-                    }
-                    else if(choice == Strings.choice_nearAxis && radioValue[key] != choice){
-                      // show an alert window here to collect information
-                      showDialog(context: context, builder: (context) =>
-                          AlertDialog(
-                            title: Text(key + choice + Strings.slit_Axis_alert),
-                            content: TextField(
-                              controller: formNearAxisController[key],
-                            ),
-                            actions: <Widget>[
-                              // confirm button
-                              FlatButton(
-                                child: Text(Strings.confirm),
-                                onPressed: (){
-                                  // save the string to otherValue[]
-                                  nearAxisValue[key] = formNearAxisController[key].text;
-
-                                  // set states
-                                  if (radioValue[key] != choice)
-                                    radioValue[key] = choice;
-                                  else
-                                    radioValue[key] = "";
-
-                                  setState(() {});
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              // cancel button
-                              FlatButton(
-                                child: Text(Strings.cancel),
-                                onPressed: () {
-                                  // clear the controller if the user say cancel
-                                  formNearAxisController[key].text = '';
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -590,6 +521,198 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
         width: double.infinity,
         child: Column(
           children: columnList,
+        ),
+      ),
+    );
+  }
+
+  Widget chamberButtons(List<String> choices, String key){
+    List<Widget> buttons = [];
+
+    if (leftCenterAxisController == null){
+      leftCenterAxisController = new TextEditingController();
+    }
+    if (leftNearAxisController == null){
+      leftNearAxisController = new TextEditingController();
+    }
+    if (rightCenterAxisController == null){
+      rightCenterAxisController = new TextEditingController();
+    }
+    if (rightNearAxisController == null){
+      rightNearAxisController = new TextEditingController();
+    }
+
+    for (String choice in choices){
+      buttons.add(
+        Expanded(
+          child: GestureDetector(
+            onTap: (){
+              if (choice == Strings.choice_centerAxis){
+                showDialog(context: context, builder: (context) => AlertDialog(
+                  title: Text(key + Strings.slit_Axis_alert),
+                  content: TextField(
+                    controller: (key == Strings.left)?leftCenterAxisController:rightCenterAxisController
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        Strings.confirm),
+                      onPressed: (){
+                        if (key == Strings.left){
+                          leftCenterAxisValue = leftCenterAxisController.text;
+                        }
+                        else{
+                          rightCenterAxisValue = rightCenterAxisController.text;
+                        }
+
+                        setState(() {});
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    FlatButton(
+                      child: Text(Strings.cancel),
+                      onPressed: (){
+                        if (key == Strings.left){
+                          leftCenterAxisController.text = '';
+                        }
+                        else{
+                          rightCenterAxisController.text = '';
+                        }
+
+                        Navigator.of(context).pop();
+                      },
+                    )
+                  ],
+                ));
+              }
+              else if (choice == Strings.choice_nearAxis){
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                    AlertDialog(
+                      title: Text(key + Strings.slit_AlertQuestion),
+                      content: TextField(
+                        controller: (key == Strings.left)?leftNearAxisController:rightNearAxisController
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                          child: Text(
+                            Strings.confirm),
+                          onPressed: (){
+                            if (key == Strings.left){
+                              leftNearAxisValue = leftNearAxisController.text;
+                            }
+                            else{
+                              rightNearAxisValue = rightNearAxisController.text;
+                            }
+
+                            setState(() {
+                              Navigator.of(context).pop();
+                            });
+                          },
+                        ),
+                        FlatButton(
+                          child: Text(Strings.cancel),
+                          onPressed: (){
+                            if (key == Strings.left){
+                              leftNearAxisController.text = '';
+                            }
+                            else{
+                              rightNearAxisController.text = '';
+                            }
+
+                            Navigator.of(context).pop();
+                          },
+                        )
+                      ],
+                    )
+                );
+              }
+              else{
+                key = Strings.slit_chamber + key;
+                showDialog(context: context, builder: (context) => 
+                  AlertDialog(
+                    title: Text(key + Strings.slit_AlertQuestion),
+                    content: TextField(
+                      controller: formOtherController[key],
+                    ),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text(Strings.confirm),
+                        onPressed: (){
+                          otherValue[key] = formOtherController[key].text;
+
+                          setState(() {
+                            Navigator.of(context).pop();
+                          });
+                        },
+                      ),
+                      FlatButton(
+                        child: Text(Strings.cancel),
+                        onPressed: (){
+                          formOtherController[key].text = '';
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ],
+                  ),
+                );
+              }
+            },
+            child: Container(
+              height: MediaQuery.of(context).size.height * Constants.columnRatio,
+              child: Center(child: Text(choice, style: TextStyle(fontSize: Constants.normalFontSize), textAlign: TextAlign.center,),),
+            ),
+          ),
+        )
+      );
+    }
+
+
+  }
+
+  /// Widget for chamber row
+  Container chamberButtonList(List<String> choices){
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(Constants.boxBorderRadius)),
+        color: Theme.of(context).disabledColor,
+      ),
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * Constants.columnRatio,
+                  width: MediaQuery.of(context).size.width * 0.1,
+                  child: Center(child: Text(Strings.right, textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: Constants.normalFontSize),),),
+                ),
+                // buttons for chamber options
+                Expanded(child: chamberButtons(choices, Strings.right),),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.01,)
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * Constants.columnRatio,
+                  width: MediaQuery.of(context).size.width * 0.1,
+                  child: Center(child: Text(Strings.left, textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: Constants.normalFontSize),),),
+                ),
+                // buttons for chamber options
+                Expanded(child: chamberButtons(choices, Strings.left),),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.01,)
+              ],
+            )
+          ],
         ),
       ),
     );

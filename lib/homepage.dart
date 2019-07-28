@@ -130,6 +130,21 @@ class HomePage extends StatelessWidget{
                 ),
               ),
             ),
+          
+            /*
+            // Rpw with register and eye pressure button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                customizeIconButton(context, (){
+                  Navigator.pushNamed(context, '/register');
+                }, imagePath, Strings.register, 0.21, 0.35),
+                customizeIconButton(context, (){
+                  Navigator.pushNamed(context, '/UserSearch', arguments: Strings.eyePressure)
+                }, imagePath, Strings.eyePressure, 0.21, 0.35)
+              ],
+            ),
+            */
 
             /// sized box as padding
             SizedBox(height: MediaQuery.of(context).size.height * 0.05,),

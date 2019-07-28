@@ -1,0 +1,6 @@
+app_identifier("hk.ust.sight.mira") # The bundle identifier of your app
+apple_id("sight@ust.hk") # Your Apple email address
+
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
