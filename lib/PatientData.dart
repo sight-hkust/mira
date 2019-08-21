@@ -50,7 +50,7 @@ class _PatientState extends State<PatientData> with SingleTickerProviderStateMix
 
     /// Construct the data types
     basicInfoList = [Strings.name, Strings.IDCard, Strings.phoneNumber, Strings.sex, Strings.dateOfBirth, Strings.school];
-    checkInfoList = [Strings.vision_livingEyeSight, Strings.vision_bareEyeSight, Strings.vision_eyeGlasses, Strings.vision_bestEyeSight, Strings.opto_diopter, Strings.opto_astigmatism, Strings.opto_astigmatismaxis, Strings.slit_conjunctiva, Strings.slit_cornea,Strings.slit_eyelid, Strings.slit_Hirschbergtest, Strings.slit_lens];
+    checkInfoList = [Strings.eyePressure_pressure,Strings.vision_livingEyeSight, Strings.vision_bareEyeSight, Strings.vision_eyeGlasses, Strings.vision_bestEyeSight, Strings.vision_hole, Strings.opto_diopter, Strings.opto_astigmatism, Strings.opto_astigmatismaxis, Strings.slit_conjunctiva, Strings.slit_cornea,Strings.slit_eyelid, Strings.slit_Hirschbergtest, Strings.slit_lens];
     slitExtraInfoList = [Strings.slit_exchange, Strings.slit_eyeballshivering];
 
     super.initState();
@@ -220,6 +220,7 @@ class _PatientState extends State<PatientData> with SingleTickerProviderStateMix
                     oneRow(Strings.vision_bareEyeSight, rep.data.vision_bareEyeSight),
                     oneRow(Strings.vision_eyeGlasses, rep.data.vision_eyeGlasses),
                     oneRow(Strings.vision_bestEyeSight, rep.data.vision_bestEyeSight),
+                    oneRow(Strings.vision_hole, rep.data.vision_hole),
                     oneRow(Strings.opto_diopter, rep.data.opto_diopter),
                     oneRow(Strings.opto_astigmatism, rep.data.opto_astigmatism),
                     oneRow(Strings.opto_astigmatismaxis, rep.data.opto_astigmatismaxis),
@@ -228,6 +229,7 @@ class _PatientState extends State<PatientData> with SingleTickerProviderStateMix
                     oneRow(Strings.slit_eyelid, rep.data.slit_eyelid),
                     oneRow(Strings.slit_lens, rep.data.slit_lens),
                     oneRow(Strings.slit_Hirschbergtest, rep.data.slit_Hirschbergtest),
+                    oneRow(Strings.eyePressure_pressure, rep.data.eye_pressure),
                   ],
                 ));
               }

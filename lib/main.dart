@@ -6,6 +6,8 @@ import 'testPages/VisionOptometry.dart';
 import 'testPages/SlitLamp.dart';
 import 'testPages/Register.dart';
 import 'package:myapp/PatientData.dart';
+import 'testPages/EyePressure.dart';
+import 'testPages/EyePhoto.dart';
 
 /// main class of the whole app, defines the theme data here
 
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         '/slitLamp': (context) => SlitLamp(),
         '/reviewProfile': (context) => PatientData(),
         '/register': (context) => Register(),
+        '/eyePressure': (context) => EyePressure(),
+        '/eyePhoto': (context) => EyePhoto(),
       },
     );
   }

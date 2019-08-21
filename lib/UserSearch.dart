@@ -235,11 +235,17 @@ class _UserSearchState extends State<UserSearch>{
                     case Strings.optometry:
                       route = '/visionOptometry';
                       break;
+                    case Strings.eyePressure:
+                      route = '/eyePressure';
+                      break;
                     case Strings.slitLamp:
                       route = '/slitLamp';
                       break;
                     case Strings.reviewingProfile:
                       route = '/reviewProfile';
+                      break;
+                    case Strings.eyePhoto:
+                      route = '/eyePhoto';
                       break;
                     default:
                       route = '';

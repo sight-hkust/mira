@@ -31,7 +31,7 @@ class SlitLamp extends StatefulWidget{
         super(key:key);
 
   @override
-  _SlitLampState createState () => _SlitLampState();
+  _SlitLampState createState() => _SlitLampState();
 }
 
 class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin{
@@ -171,11 +171,10 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                     Center(child: Text( Strings.slit_lens, style: TextStyle(fontSize: Constants.normalFontSize + 5),),),
                     leftRightChoiceButtonList(Strings.slit_lens, Constants.lens),
 
-                    
                     Center(child: Text(
                       Strings.slit_chamber, style: TextStyle(fontSize: Constants.normalFontSize + 5),
                     ),),
-                    chamberButtonList(Constants.chamber)
+                    chamberButtonList(Strings.slit_chamber, Constants.chamber)
                     
 
                   ],
@@ -274,12 +273,11 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                 right_slit_chamber: getData(Strings.slit_chamber+Strings.right),
                 slit_exchange: getData(Strings.slit_exchange),
                 slit_eyeballshivering: getData(Strings.slit_eyeballshivering),
-                /*
-                left_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.left, chamber_center: true),
-                left_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.left, chamber_near: true),
-                right_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.right, chamber_center: true),
-                right_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.right, chamber_near: true),
-                */
+                left_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.left),
+                left_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.left),
+                right_slit_chamber_center: getData(Strings.choice_centerAxis+Strings.right),
+                right_slit_chamber_near: getData(Strings.choice_nearAxis+Strings.right),
+                
             );
             SlitlampTest newData = await createSlitLampTest(widget.profileID, newslitlampTest.toMap()).timeout(const Duration(seconds: 10), onTimeout: (){ return null; });
 
@@ -321,6 +319,18 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
 
   // Decide to get data from othervalue or radiovalue
   String getData(String key){
+    if (key == Strings.choice_centerAxis+Strings.left){
+      return leftCenterAxisValue;
+    }
+    else if (key == Strings.choice_centerAxis+Strings.right){
+      return rightCenterAxisValue;
+    }
+    else if (key == Strings.choice_nearAxis+Strings.left){
+      return leftNearAxisValue;
+    }
+    else if (key == Strings.choice_nearAxis+Strings.right){
+      return rightNearAxisValue;
+    }
     String result;
     if (otherValue[key] != null && otherValue[key] != '') {
       result = otherValue[key];
@@ -363,7 +373,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                               FlatButton(
                                 child: Text(Strings.confirm),
                                 onPressed: (){
-                                  // save the string to otherValue[]
+                                   // save the string to otherValue[]
                                   otherValue[key] = formOtherController[key].text;
 
                                   // set states
@@ -526,9 +536,12 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
     );
   }
 
+  // Return a button for the chamber checking items
   Widget chamberButtons(List<String> choices, String key){
     List<Widget> buttons = [];
 
+    // We need to Initiate these controller before we set them as controller
+    // Else we cannot use them later
     if (leftCenterAxisController == null){
       leftCenterAxisController = new TextEditingController();
     }
@@ -541,6 +554,9 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
     if (rightNearAxisController == null){
       rightNearAxisController = new TextEditingController();
     }
+    if (formOtherController[Strings.slit_chamber + key] == null){
+      formOtherController[Strings.slit_chamber + key] = new TextEditingController();
+    }
 
     for (String choice in choices){
       buttons.add(
@@ -549,7 +565,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
             onTap: (){
               if (choice == Strings.choice_centerAxis){
                 showDialog(context: context, builder: (context) => AlertDialog(
-                  title: Text(key + Strings.slit_Axis_alert),
+                  title: Text(key + Strings.choice_centerAxis),
                   content: TextField(
                     controller: (key == Strings.left)?leftCenterAxisController:rightCenterAxisController
                   ),
@@ -590,7 +606,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                   context: context,
                   builder: (context) =>
                     AlertDialog(
-                      title: Text(key + Strings.slit_AlertQuestion),
+                      title: Text(key + Strings.choice_nearAxis),
                       content: TextField(
                         controller: (key == Strings.left)?leftNearAxisController:rightNearAxisController
                       ),
@@ -629,28 +645,26 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                 );
               }
               else{
-                key = Strings.slit_chamber + key;
                 showDialog(context: context, builder: (context) => 
                   AlertDialog(
-                    title: Text(key + Strings.slit_AlertQuestion),
+                    title: Text(Strings.slit_chamber + key + Strings.slit_AlertQuestion),
                     content: TextField(
-                      controller: formOtherController[key],
+                      controller: formOtherController[Strings.slit_chamber + key],
                     ),
                     actions: <Widget>[
                       FlatButton(
                         child: Text(Strings.confirm),
                         onPressed: (){
-                          otherValue[key] = formOtherController[key].text;
+                          otherValue[Strings.slit_chamber + key] = formOtherController[Strings.slit_chamber + key].text;
 
-                          setState(() {
-                            Navigator.of(context).pop();
-                          });
+                          setState(() {});
+                          Navigator.of(context).pop();
                         },
                       ),
                       FlatButton(
                         child: Text(Strings.cancel),
                         onPressed: (){
-                          formOtherController[key].text = '';
+                          formOtherController[Strings.slit_chamber + key].text = '';
                           Navigator.of(context).pop();
                         },
                       )
@@ -668,11 +682,17 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
       );
     }
 
+    // return the buttons row 
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: buttons,
+    );
+
 
   }
 
   /// Widget for chamber row
-  Container chamberButtonList(List<String> choices){
+  Container chamberButtonList(String test, List<String> choices){
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(Constants.boxBorderRadius)),
@@ -682,6 +702,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
         width: double.infinity,
         child: Column(
           children: <Widget>[
+            // The row for right eye
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.max,
@@ -697,6 +718,7 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
                 SizedBox(width: MediaQuery.of(context).size.width * 0.01,)
               ],
             ),
+            // The row for left eye
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               mainAxisSize: MainAxisSize.max,

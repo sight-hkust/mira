@@ -20,7 +20,7 @@ class Constants{
   static const consultationTabNumber = 5;
 
   /// FOR BUILDING TESTPAGES
-  static const List<String> visionTest = [Strings.vision_bareEyeSight, Strings.vision_eyeGlasses];
+  static const List<String> visionTest = [Strings.vision_bareEyeSight, Strings.vision_eyeGlasses, Strings.vision_hole];
   static const List<String> optometry =[Strings.opto_diopter, Strings.opto_astigmatism, Strings.opto_astigmatismaxis];
 
   // slit lamp
@@ -29,6 +29,9 @@ class Constants{
   static const List<String> cornea = [Strings.choice_normal, Strings.choice_cloudy, Strings.choice_others];
   static const List<String> lens = [Strings.choice_normal, Strings.choice_cloudy, Strings.choice_absent, Strings.choice_IOL, Strings.choice_others];
   static const List<String> chamber = [Strings.choice_centerAxis, Strings.choice_nearAxis, Strings.choice_others];
+
+  // Eye photo
+  static const List<String> eyePhoto = [Strings.choice_normal, Strings.choice_notNormal, Strings.choice_others];
 
   // hirschberg
   static const List<String> hirschbergTest = [Strings.choice_normal, Strings.choice_lookoutward, Strings.choice_lookinward, Strings.choice_lookupward, Strings.choice_notabletostare];
@@ -39,10 +42,17 @@ class Constants{
   static const List<String> consultation = [Strings.con_normaleyesight, Strings.con_abonormaldiopter, Strings.con_strabismus, Strings.con_trichiasis, Strings.con_conjunctivitis, Strings.choice_others];
 
   /// FOR CONNECTING TO SERVER
+  
+  /// SIGHT server
   //static const URL_STU = 'https://api.sightseeing.projects.sight.ust.hk/students';
   //static const URL_RECORD = 'https://api.sightseeing.projects.sight.ust.hk/check-record';
-  //static const URL_STU = 'http://113.106.224.28:3000/students';
-  //static const URL_RECORD = 'http://113.106.224.28:3000/check-record';
-  static const URL_STU = 'http://localhost:3030/students';
-  static const URL_RECORD = 'http://localhost:3030/check-record';
+  
+  /// Hospital Server
+  static const URL_STU = 'http://sight.jsiec.org/students';
+  static const URL_RECORD = 'http://sight.jsiec.org/check-record';
+  static const URL_AUTH = 'http://sight.jsiec.org/authentication/';
+
+  /// Local server
+  //static const URL_STU = 'http://localhost:3030/students';
+  //static const URL_RECORD = 'http://localhost:3030/check-record';
 }

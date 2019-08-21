@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage>{
                     decoration: InputDecoration(
                       labelText: Strings.loginname,
                     ),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     style: TextStyle(
                       color: Theme.of(context).textSelectionColor,
                       fontSize: Constants.labelTextSize,

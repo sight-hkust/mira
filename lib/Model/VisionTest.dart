@@ -35,6 +35,8 @@ Future<VisionTest> createVisionTest(String patientID, {Map<String, dynamic> body
 }
 
 class VisionTest{
+  final String left_vision_hole;
+  final String right_vision_hole;
   final String left_vision_livingEyeSight;
   final String right_vision_livingEyeSight;
   final String left_vision_bareEyeSight;
@@ -44,7 +46,7 @@ class VisionTest{
   final String left_vision_bestEyeSight;
   final String right_vision_bestEyeSight;
 
-  VisionTest({this.left_vision_livingEyeSight, this.right_vision_livingEyeSight, this.left_vision_bareEyeSight, this.right_vision_bareEyeSight, this.left_vision_eyeGlasses, this.right_vision_eyeGlasses, this.left_vision_bestEyeSight, this.right_vision_bestEyeSight});
+  VisionTest({this.left_vision_hole, this.right_vision_hole, this.left_vision_livingEyeSight, this.right_vision_livingEyeSight, this.left_vision_bareEyeSight, this.right_vision_bareEyeSight, this.left_vision_eyeGlasses, this.right_vision_eyeGlasses, this.left_vision_bestEyeSight, this.right_vision_bestEyeSight});
 
   // Convert the json of the content of the http response to a VisionTest object
   factory VisionTest.fromJson(Map<String, dynamic> json){
@@ -54,11 +56,13 @@ class VisionTest{
         left_vision_bareEyeSight: json['left_vision_bareEyeSight'],
         left_vision_eyeGlasses: json['left_vision_eyeGlasses'],
         left_vision_bestEyeSight: json['left_vision_bestEyeSight'],
+        left_vision_hole: json['left_vision_hole'],
 
         right_vision_livingEyeSight: json['right_vision_livingEyeSight'],
         right_vision_bareEyeSight: json['right_vision_bareEyeSight'],
         right_vision_eyeGlasses: json['right_vision_eyeGlasses'],
-        right_vision_bestEyeSight: json['right_vision_bestEyeSight']
+        right_vision_bestEyeSight: json['right_vision_bestEyeSight'], 
+        right_vision_hole: json['right_vision_hole']
     );
   }
 
@@ -70,11 +74,13 @@ class VisionTest{
     map['left_vision_bareEyeSight'] = left_vision_bareEyeSight;
     map['left_vision_eyeGlasses'] = left_vision_eyeGlasses;
     map['left_vision_bestEyeSight'] = left_vision_bestEyeSight;
+    map['left_vision_hole'] = left_vision_hole;
 
     map['right_vision_livingEyeSight'] = right_vision_livingEyeSight;
     map['right_vision_bareEyeSight'] = right_vision_bareEyeSight;
     map['right_vision_eyeGlasses'] = right_vision_eyeGlasses;
     map['right_vision_bestEyeSight'] = right_vision_bestEyeSight;
+    map['right_vision_hole'] = right_vision_hole;
 
     return map;
   }

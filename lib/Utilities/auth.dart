@@ -1,10 +1,11 @@
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:myapp/Utilities/Constant.dart';
 
 Future<bool> login(String userName, String password) async{
   try{
-    return http.post('http://localhost:3030/authentication/', body: {
+    return http.post(Constants.URL_AUTH, body: {
       'strategy': 'local',
       'userName': userName,
       'password': password

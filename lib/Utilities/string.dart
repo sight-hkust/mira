@@ -5,7 +5,8 @@ class Strings{
   static const String hirschberg = '眼位檢查';
   static const String reviewingProfile = '检视档案';
   static const String register = '建立档案';
-  static const String eyePressure = '眼压检查';
+  static const String eyePressure = '眼内压检查';
+  static const String eyePhoto = '眼底相片检查';
 
   static const String leaveAppQuestion = '是否确定离开APP?';
   static const String leavingAlertQuestion = '数据尚未储存\n是否确定离开?';
@@ -13,7 +14,7 @@ class Strings{
   static const String backAlertQuestion = '是否确定返回?';
   static const String backHomeAlertQuestion = '返回主页?';
   static const String slit_AlertQuestion = '注意事项:';
-  static const String slit_Axis_alert = 'CT';
+  static const String slit_Axis_Center_alert = 'CT';
   static const String fileNotExist = '档案不存在\n请重新输入';
   static const String submit = '请递交';
   static const String cannotSubmit = '无法递交\n请重新输入';
@@ -36,17 +37,20 @@ class Strings{
   static const String profileID= '档案编号';
   static const String searchButton = '搜寻';
   static const String searching = '搜寻中, 请稍等';
-  static const String searchSameNameAlert = '请问是下列哪位同学?';
+  static const String searchSameNameAlert = '请问是下列哪位?';
 
   static const String patientIDTyping = '學生姓名: ';
   static const String profileIDTyping= '档案编号: ';
   static const String right = '右';
   static const String left = '左';
 
+  static const String eyePressure_pressure = '眼内压';
+
   static const String vision_livingEyeSight = '生活远视力';
   static const String vision_bareEyeSight = '裸眼远视力';
   static const String vision_eyeGlasses = '戴镜远视力';
   static const String vision_bestEyeSight = '最佳矫正视力';
+  static const String vision_hole = '小孔视力';
 
   static const String successRecord = '成功纪录';
   static const String submitting = '递交中';
@@ -73,6 +77,7 @@ class Strings{
   static const String choice_bloodFilled = '充血';
   static const String choice_cloudy = '混浊';
   static const String choice_absent = '缺如';
+  static const String choice_notNormal = '异常';
 
   static const String choice_centerAxis = '中央轴深';
   static const String choice_nearAxis = '周边轴深';
@@ -108,6 +113,8 @@ class Strings{
   static const String con_furtheroptomery = '需进一步验光';
   static const String con_previouspage = '上一页';
   static const String con_nextpatient = '下一个';
+
+  static const String eyePhoto_photo = "眼底照";
 
   static const String need = '需要';
   static const String noNeed = '不需要';

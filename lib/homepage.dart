@@ -98,58 +98,24 @@ class HomePage extends StatelessWidget{
 
             /// sized box as padding
             SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
-
-            ///  2. Register button
-            GestureDetector(
-              onTap: (){
-                Navigator.pushNamed(context, '/register');
-              },
-
-              child: Center(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).disabledColor,
-                    borderRadius: BorderRadius.circular(Constants.boxBorderRadius),
-                  ),
-
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(Icons.account_circle, size: Constants.normalFontSize,),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.05,),
-                      Text(Strings.register,
-                        style: TextStyle(
-                          fontSize: Constants.normalFontSize,
-                          color: Theme.of(context).textSelectionColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
           
-            /*
-            // Rpw with register and eye pressure button
+            // 2. Row with register and eye pressure button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 customizeIconButton(context, (){
                   Navigator.pushNamed(context, '/register');
-                }, imagePath, Strings.register, 0.21, 0.35),
+                }, 'assets/images/Vision.png', Strings.register, 0.21, 0.35),
                 customizeIconButton(context, (){
-                  Navigator.pushNamed(context, '/UserSearch', arguments: Strings.eyePressure)
-                }, imagePath, Strings.eyePressure, 0.21, 0.35)
+                  Navigator.pushNamed(context, '/UserSearch', arguments: Strings.eyePressure);
+                }, 'assets/images/Vision.png', Strings.eyePressure, 0.21, 0.35)
               ],
             ),
-            */
 
             /// sized box as padding
             SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
 
-            /// 3. first row with vision test button and optometry button
+            /// 3. Row with vision test button and optometry button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -163,7 +129,7 @@ class HomePage extends StatelessWidget{
             /// sized box as padding
             SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
 
-            ///  4. second row with slip lamp test button and checking patient data button
+            ///  4. Row with slip lamp test button and checking patient data button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -173,6 +139,17 @@ class HomePage extends StatelessWidget{
                     'assets/images/Review.png', Strings.consultation, 0.21, 0.35),
               ],
             ),
+
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05,),
+
+            /// 5. Row with eye photo button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                customizeIconButton(context, (){Navigator.pushNamed(context, '/UserSearch', arguments: Strings.eyePhoto);}, 
+                'assets/images/SlitLamp.png', Strings.eyePhoto, 0.21, 0.35),
+              ],
+            )
           ],
         ),
       ),
