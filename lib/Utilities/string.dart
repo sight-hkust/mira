@@ -106,11 +106,16 @@ class Strings{
   static const String con_strabismus = '共同性斜视';
   static const String con_trichiasis = '倒睫';
   static const String con_conjunctivitis = '结膜炎';
+  static const String con_cataract = '白内障';
+  static const String con_glaucosis = "可疑青光眼";
+  static const String con_DR = "糖网";
   static const String con_handle = '处理';
   static const String con_typehere = '在这里输入';
   static const String con_furthercheckingup = '检查情况';
   static const String con_furtherreview = '疑有异常需复诊';
   static const String con_furtheroptomery = '需进一步验光';
+  static const String con_cataract_operation = '白内障初筛扶贫病人';
+  static const String con_cataract_nonOperation = '白内障无需手术患者';
   static const String con_previouspage = '上一页';
   static const String con_nextpatient = '下一个';
 
@@ -125,7 +130,7 @@ class Strings{
   static const String sex = '性别';
   static const String dateOfBirth = '出生日期';
   static const String IDCard = '身份证';
-  static const String school = '学校';
+  static const String school = '学校/地址';
 
   static const String noDate = '沒有日期';
   static const String noName = '无名氏';

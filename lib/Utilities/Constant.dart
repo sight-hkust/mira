@@ -39,7 +39,7 @@ class Constants{
   static const List<String> eyeballShivering = [Strings.choice_nothing, Strings.choice_shown, Strings.choice_notshown, Strings.choice_both];
 
   // consultation
-  static const List<String> consultation = [Strings.con_normaleyesight, Strings.con_abonormaldiopter, Strings.con_strabismus, Strings.con_trichiasis, Strings.con_conjunctivitis, Strings.choice_others];
+  static const List<String> consultation = [Strings.con_normaleyesight, Strings.con_abonormaldiopter, Strings.con_strabismus, Strings.con_trichiasis, Strings.con_conjunctivitis, Strings.con_cataract, Strings.choice_pterygium, Strings.con_glaucosis, Strings.con_DR, Strings.choice_MGD, Strings.choice_others];
 
   /// FOR CONNECTING TO SERVER
   
@@ -53,6 +53,7 @@ class Constants{
   static const URL_AUTH = 'http://sight.jsiec.org/authentication/';
 
   /// Local server
-  //static const URL_STU = 'http://localhost:3030/students';
-  //static const URL_RECORD = 'http://localhost:3030/check-record';
+  // static const URL_STU = 'http://localhost:8080/students';
+  // static const URL_RECORD = 'http://localhost:8080/check-record';
+  // static const URL_AUTH = 'http://localhost:8080/authentication';
 }

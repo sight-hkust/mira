@@ -331,6 +331,22 @@ class _SlitLampState extends State<SlitLamp> with SingleTickerProviderStateMixin
     else if (key == Strings.choice_nearAxis+Strings.right){
       return rightNearAxisValue;
     }
+    else if (key == Strings.slit_chamber+Strings.right){
+      if (otherValue[key] != null && otherValue[key] != ''){
+        return otherValue[key];
+      }
+      else {
+        return '';
+      }
+    }
+    else if (key == Strings.slit_chamber+Strings.left){
+      if (otherValue[key] != null && otherValue[key] != ''){
+        return otherValue[key];
+      }
+      else {
+        return '';
+      }
+    }
     String result;
     if (otherValue[key] != null && otherValue[key] != '') {
       result = otherValue[key];

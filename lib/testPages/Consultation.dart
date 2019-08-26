@@ -52,15 +52,11 @@ class _ConsultState extends State<Consultation>{
     
   }
 
-  String getData(String key){
-    String result;
+  String getOtherData(String key){
     if (otherValue[key] != null && otherValue[key] != '') {
-      result = otherValue[key];
+      return otherValue[key];
     }
-    else{
-      result = radioValue[key];
-    }
-    return result;
+    return "";
   }
 
   @override
@@ -110,7 +106,7 @@ class _ConsultState extends State<Consultation>{
             if(rep.hasData){
               return(Column(
                 children: <Widget>[
-                  oneRow(Strings.consultation, rep.data.problems),
+                  oneRow(Strings.consultation, rep.data.problemOther),
                   oneRow(Strings.con_handle, rep.data.handle),
                   oneRow(Strings.con_furtheroptomery, (rep.data.furtheropt == 'yes') ? Strings.need : ((rep.data.furtheropt == null)? null : Strings.noNeed)),
                   oneRow(Strings.con_furtherreview, (rep.data.furtherreview == 'yes') ? Strings.need : ((rep.data.furtherreview == null) ? null : Strings.noNeed)),
@@ -178,6 +174,8 @@ class _ConsultState extends State<Consultation>{
             children: <Widget>[
               furtherButtons(Strings.con_furtherreview),
               furtherButtons(Strings.con_furtheroptomery),
+              furtherButtons(Strings.con_cataract_operation),
+              furtherButtons(Strings.con_cataract_nonOperation)
             ]
         ),
       ),
@@ -197,10 +195,22 @@ class _ConsultState extends State<Consultation>{
             });
 
             ConsultRecord newConsultRecord = new ConsultRecord(
-                problems: getData(Strings.consultation),
                 handle: handleController.text,
                 furtheropt: radioValue[Strings.con_furtheroptomery],
-                furtherreview: radioValue[Strings.con_furtherreview]
+                furtherreview: radioValue[Strings.con_furtherreview],
+                problemOther: getOtherData(Strings.choice_others),
+                problemNormaleyesight: radioValue[Strings.con_normaleyesight],
+                problemAbonormaldiopter: radioValue[Strings.con_abonormaldiopter],
+                problemStrabismus: radioValue[Strings.con_strabismus],
+                problemTrichiasis: radioValue[Strings.con_trichiasis],
+                problemConjunctivitis: radioValue[Strings.con_conjunctivitis],
+                problemCataract: radioValue[Strings.con_cataract],
+                problemDR: radioValue[Strings.con_DR],
+                problemMGD: radioValue[Strings.choice_MGD],
+                problemGlaucosis: radioValue[Strings.con_glaucosis],
+                problemPterygium: radioValue[Strings.choice_pterygium],
+                cataractNoOpt: radioValue[Strings.con_cataract_nonOperation],
+                cataractOpt: radioValue[Strings.con_cataract_operation]
             );
             ConsultRecord newConsult = await createConsultRecord(widget.profileID, newConsultRecord.toMap()).timeout(const Duration(seconds: 10), onTimeout: () {return null;});
 
@@ -236,6 +246,7 @@ class _ConsultState extends State<Consultation>{
 
 
   /// BELOW IS THE OLD CONSULTATION PART
+  
   Widget furtherButtons(String key){
     // Reset the Value of the radioVlaue[key]
     if(radioValue[key] == null) radioValue[key] = '';
@@ -269,16 +280,19 @@ class _ConsultState extends State<Consultation>{
 
   }
 
-  /// Return a row of radio button
-  /// @param:
-  /// - choices (List of String): the text showing on the buttons
-  /// - key (String): to search in radioValues
-  Widget radioButtons(List<String> choices, String key){
+  // Modified version of radio Buttons
+  Widget radioButtons(List<String> choices){
     List<Widget> buttons = []; // temp. store the widgets need to create inside the row
-    if(formOtherController[key] == null) formOtherController[key] = new TextEditingController();
-    if(radioValue[key] == null) radioValue[key] = '';
 
     for(String choice in choices){
+
+      if(formOtherController[choice] == null){
+        formOtherController[choice] = new TextEditingController();
+      }
+      if(radioValue[choice] == null) {
+        radioValue[choice] = '';
+      }
+
       // add gesture detectors with loop
       buttons.add(
           Expanded(
@@ -288,13 +302,13 @@ class _ConsultState extends State<Consultation>{
                 /// 1. onTap:  define the action that user tapping the rectangular box
                   onTap: () {
                     // if the choice is other and other is not turned blue yet
-                    if (choice == Strings.choice_others && radioValue[key] != choice) {
+                    if (choice == Strings.choice_others && radioValue[choice] != 'yes') {
                       // show an alert window here to collect information
                       showDialog(context: context, builder: (context) =>
                           AlertDialog(
-                            title: Text(key + Strings.slit_AlertQuestion),
+                            title: Text(choice + Strings.slit_AlertQuestion),
                             content: TextField(
-                              controller: formOtherController[key],
+                              controller: formOtherController[choice],
                             ),
                             actions: <Widget>[
                               // confirm button
@@ -302,13 +316,13 @@ class _ConsultState extends State<Consultation>{
                                 child: Text(Strings.confirm),
                                 onPressed: (){
                                   // save the string to otherValue[]
-                                  otherValue[key] = formOtherController[key].text;
+                                  otherValue[choice] = formOtherController[choice].text;
 
                                   // set states
-                                  if (radioValue[key] != choice)
-                                    radioValue[key] = choice;
+                                  if (radioValue[choice] != 'yes')
+                                    radioValue[choice] = 'yes';
                                   else
-                                    radioValue[key] = "";
+                                    radioValue[choice] = '';
 
                                   setState(() {});
                                   Navigator.of(context).pop();
@@ -319,7 +333,7 @@ class _ConsultState extends State<Consultation>{
                                 child: Text(Strings.cancel),
                                 onPressed: () {
                                   // clear the controller if the user say cancel
-                                  formOtherController[key].text = '';
+                                  formOtherController[choice].text = '';
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -329,15 +343,15 @@ class _ConsultState extends State<Consultation>{
                     }
                     else {
                       // because the choice cannot be choosing other, or just cancel the choice, so clear controller
-                      formOtherController[key].text = '';
+                      formOtherController[choice].text = '';
                       // also clear the value stored
-                      otherValue[key] = "";
+                      otherValue[choice] = "";
 
                       // set radio values
-                      if (radioValue[key] != choice)
-                        radioValue[key] = choice;
+                      if (radioValue[choice] != 'yes')
+                        radioValue[choice] = 'yes';
                       else
-                        radioValue[key] = "";
+                        radioValue[choice] = '';
 
                       // rebuild the whole widget by changing radio value, to make a certain cell become blur or not blue
                       setState((){});
@@ -353,7 +367,7 @@ class _ConsultState extends State<Consultation>{
                     ),),
                     decoration: BoxDecoration(
                       // defines the color of the box, by following the radio value
-                      color: (radioValue[key] == choice)?
+                      color: (radioValue[choice] == 'yes')?
                       Theme.of(context).hintColor: Theme.of(context).disabledColor,
                     ),
                   )
@@ -382,7 +396,7 @@ class _ConsultState extends State<Consultation>{
     for(String choice in choices){
       choiceList.add(choice);
       if(counter % 2 == 1 || counter == choices.length - 1){
-        columnList.add(radioButtons(choiceList, test));
+        columnList.add(radioButtons(choiceList));
         choiceList = [];
       }
       ++ counter;

@@ -36,37 +36,87 @@ Future<ConsultRecord> getConsultRecord(String patientID) async{
 }
 
 class ConsultRecord{
-  final String problems;
+  final String problemOther;
+  final String problemNormaleyesight;
+  final String problemAbonormaldiopter;
+  final String problemStrabismus;
+  final String problemTrichiasis;
+  final String problemConjunctivitis;
+  final String problemCataract;
+  final String problemPterygium;
+  final String problemGlaucosis;
+  final String problemDR;
+  final String problemMGD;
   final String handle;
   final String furtherreview;
   final String furtheropt;
+  final String cataractOpt;
+  final String cataractNoOpt;
 
-  ConsultRecord({this.problems, this.handle, this.furtheropt, this.furtherreview});
+
+  ConsultRecord({this.handle, this.furtheropt, this.furtherreview, this.problemOther, this.problemNormaleyesight, this.problemAbonormaldiopter, this.problemStrabismus, this.problemTrichiasis, this.problemConjunctivitis, this.problemCataract, this.problemDR, this.problemMGD, this.problemGlaucosis, this.problemPterygium, this.cataractOpt, this.cataractNoOpt});
 
   factory ConsultRecord.fromJson(Map<String, dynamic> json){
     return ConsultRecord(
-      problems: json['data'][0]['problems'],
       handle: json['data'][0]['handle'],
       furtherreview: json['data'][0]['furtherreview'],
-      furtheropt: json['data'][0]['furtheropt']
+      furtheropt: json['data'][0]['furtheropt'],
+      problemOther: json['data'][0]['problemOther'],
+      problemNormaleyesight: json['data'][0]['problemNormaleyesight'],
+      problemAbonormaldiopter: json['data'][0]['problemAbonormaldiopter'],
+      problemStrabismus: json['data'][0]['problemStrabismus'],
+      problemTrichiasis: json['data'][0]['problemTrichiasis'],
+      problemConjunctivitis: json['data'][0]['problemConjunctivitis'],
+      problemCataract: json['data'][0]['problemCataract'],
+      problemDR: json['data'][0]['problemDR'],
+      problemMGD: json['data'][0]['problemMGD'],
+      problemGlaucosis: json['data'][0]['problemGlaucosis'],
+      problemPterygium: json['data'][0]['problemPterygium'],
+      cataractOpt: json['data'][0]['cataractOpt'],
+      cataractNoOpt: json['data'][0]['cataractNoOpt'],
     );
   }
 
   factory ConsultRecord.fromReturnJson(Map<String, dynamic> json){
     return ConsultRecord(
-        problems: json['problems'],
-        handle: json['handle'],
-        furtherreview: json['furtherreview'],
-        furtheropt: json['furtheropt']
+      handle: json['handle'],
+      furtherreview: json['furtherreview'],
+      furtheropt: json['furtheropt'],
+      problemOther: json['problemOther'],
+      problemNormaleyesight: json['problemNormaleyesight'],
+      problemAbonormaldiopter: json['problemAbonormaldiopter'],
+      problemStrabismus: json['problemStrabismus'],
+      problemTrichiasis: json['problemTrichiasis'],
+      problemConjunctivitis: json['problemConjunctivitis'],
+      problemCataract: json['problemCataract'],
+      problemDR: json['problemDR'],
+      problemMGD: json['problemMGD'],
+      problemGlaucosis: json['problemGlaucosis'],
+      problemPterygium: json['problemPterygium'],
+      cataractOpt: json['cataractOpt'],
+      cataractNoOpt: json['cataractNoOpt'],
     );
   }
 
   Map toMap(){
     var map = new Map<String, dynamic>();
-    map['problems'] = problems;
+
     map['handle'] = handle;
     map['furtheropt'] = furtheropt;
     map['furtherreview'] = furtherreview;
+    map['problemOther'] = problemOther;
+    map['problemNormaleyesight'] = problemNormaleyesight;
+    map['problemAbonormaldiopter'] = problemAbonormaldiopter;
+    map['problemStrabismus'] = problemStrabismus;
+    map['problemTrichiasis'] = problemTrichiasis;
+    map['problemConjunctivitis'] = problemConjunctivitis;
+    map['problemCataract'] = problemCataract;
+    map['problemDR'] = problemDR;
+    map['problemMGD'] = problemMGD;
+    map['problemGlaucosis'] = problemGlaucosis;
+    map['problemPterygium'] = problemPterygium;
+    map['cataractOpt'] = cataractOpt;
+    map['cataractNoOpt'] = cataractNoOpt;
 
     return map;
   }
