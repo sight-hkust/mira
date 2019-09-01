@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'Utilities/AppBar.dart';
 import 'Utilities/string.dart';
 import 'Utilities/Functions.dart';
-import 'package:myapp/Utilities/Constant.dart';
+import 'Utilities/Constant.dart';
 import 'testPages/Consultation.dart';
 
-import 'package:myapp/Model/BasicInfo.dart';
-import 'package:myapp/Model/CheckInfo.dart';
-import 'package:myapp/Model/SlitExtraInfo.dart';
+import 'Model/BasicInfo.dart';
+import 'Model/CheckInfo.dart';
+import 'Model/SlitExtraInfo.dart';
 
 class PatientData extends StatefulWidget{
   // see if the arguments from last page is received

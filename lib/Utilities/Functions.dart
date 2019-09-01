@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'string.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/Model/BasicInfo.dart';
+import '../Model/BasicInfo.dart';
 import 'Constant.dart';
 
 class Functions{

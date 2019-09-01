@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:myapp/Utilities/Constant.dart';
+import '../Utilities/Constant.dart';
 
 Future<OptTest> createOptTest(String patientID, Map<String, dynamic> body) async {
   try{

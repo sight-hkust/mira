@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Utilities/string.dart';
+import 'Utilities/string.dart';
 import 'Utilities/Constant.dart';
 import 'Utilities/Functions.dart';
 import 'Utilities/AppBar.dart';

@@ -5,7 +5,7 @@ import 'UserSearch.dart';
 import 'testPages/VisionOptometry.dart';
 import 'testPages/SlitLamp.dart';
 import 'testPages/Register.dart';
-import 'package:myapp/PatientData.dart';
+import 'PatientData.dart';
 import 'testPages/EyePressure.dart';
 import 'testPages/EyePhoto.dart';
 

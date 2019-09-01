@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Utilities/AppBar.dart';
-import 'package:myapp/Utilities/string.dart';
-import 'package:myapp/Utilities/Functions.dart';
-import 'package:myapp/Utilities/Constant.dart';
+import '../Utilities/AppBar.dart';
+import '../Utilities/string.dart';
+import '../Utilities/Functions.dart';
+import '../Utilities/Constant.dart';
 
-import 'package:myapp/Model/ConsultRecord.dart';
+import '../Model/ConsultRecord.dart';
 
 class Consultation extends StatefulWidget{
   // judge whether the widget is in viewing mode or submitting mode

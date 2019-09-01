@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Utilities/AppBar.dart';
-import 'package:myapp/Utilities/bottomForTestPages.dart';
-import 'package:myapp/Utilities/string.dart';
-import 'package:myapp/Utilities/Functions.dart';
-import 'package:myapp/Utilities/Constant.dart';
-import 'package:myapp/Model/EyePhotoTest.dart';
+import '../Utilities/AppBar.dart';
+import '../Utilities/bottomForTestPages.dart';
+import '../Utilities/string.dart';
+import '../Utilities/Functions.dart';
+import '../Utilities/Constant.dart';
+import '../Model/EyePhotoTest.dart';
 
 class EyePhoto extends StatefulWidget{
   bool isArgReceived;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Utilities/Functions.dart';
-import 'package:myapp/Utilities/string.dart';
-import 'package:myapp/Utilities/AppBar.dart';
-import 'package:myapp/Utilities/Constant.dart';
+import '../Utilities/Functions.dart';
+import '../Utilities/string.dart';
+import '../Utilities/AppBar.dart';
+import '../Utilities/Constant.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
-import 'package:myapp/Model/PatientInfo.dart';
+import '../Model/PatientInfo.dart';
 
 class Register extends StatefulWidget{
   // show text in the confirm button

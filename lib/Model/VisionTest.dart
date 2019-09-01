@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:myapp/Utilities/Constant.dart';
+import '../Utilities/Constant.dart';
 
 /*
   # Function that will take the body as a map and POST it to the server as json format

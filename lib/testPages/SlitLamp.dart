@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
 import 'package:http/http.dart';
-import 'package:myapp/Utilities/Functions.dart';
-import 'package:myapp/Utilities/string.dart';
-import 'package:myapp/Utilities/AppBar.dart';
-import 'package:myapp/Utilities/bottomForTestPages.dart';
-import 'package:myapp/Utilities/CustomRadioButton.dart';
-import 'package:myapp/Utilities/Constant.dart';
-import 'package:myapp/Model/SlitLampTest.dart';
+import '../Utilities/Functions.dart';
+import '../Utilities/string.dart';
+import '../Utilities/AppBar.dart';
+import '../Utilities/bottomForTestPages.dart';
+import '../Utilities/CustomRadioButton.dart';
+import '../Utilities/Constant.dart';
+import '../Model/SlitLampTest.dart';
 
 class SlitLamp extends StatefulWidget{
   // see if the arguments from last page is received

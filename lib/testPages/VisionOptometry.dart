@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/Utilities/Functions.dart';
-import 'package:myapp/Utilities/string.dart';
-import 'package:myapp/Utilities/AppBar.dart';
-import 'package:myapp/Utilities/bottomForTestPages.dart';
-import 'package:myapp/Utilities/Constant.dart';
-import 'package:myapp/Model/VisionTest.dart';
-import 'package:myapp/Model/OptTest.dart';
+import '../Utilities/Functions.dart';
+import '../Utilities/string.dart';
+import '../Utilities/AppBar.dart';
+import '../Utilities/bottomForTestPages.dart';
+import '../Utilities/Constant.dart';
+import '../Model/VisionTest.dart';
+import '../Model/OptTest.dart';
 
 class VisionOptometry extends StatefulWidget{
   // see if the arguments from last page is received
