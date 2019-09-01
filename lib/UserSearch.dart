@@ -6,7 +6,7 @@ import 'Utilities/string.dart';
 import 'package:intl/intl.dart';
 
 import 'dart:async';
-import 'package:myapp/Model/BasicInfo.dart';
+import 'Model/basicInfo.dart';
 
 class UserSearch extends StatefulWidget{
   // submit to the page navigate to, showing the test that the user want to run
