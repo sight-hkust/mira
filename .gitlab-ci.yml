@@ -6,7 +6,8 @@ variables:
   LANG: "en_US.UTF-8"
 
 android:
-  tags: android
+  tags:
+    - android
   stage: build
   before_script:
     - echo $KEYSTORE | base64 -d > android/keystore.jks
