@@ -6,19 +6,33 @@ variables:
   LANG: "en_US.UTF-8"
 
 android:
-  image: cirrusci/flutter:stable
+  tags:
+    - android
   stage: build
   before_script:
-    - echo $KEYSTORE | base64 -d > android/keystore.jks
+    - echo $KEYSTORE | base64 --decode > android/keystore.jks
     - echo "storeFile=keystore.jks" > android/key.properties
     - echo "storePassword=$KEYSTORE_PASSWORD" >> android/key.properties
     - echo "keyAlias=$ALIAS" >> android/key.properties
     - echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
   script:
     - flutter packages get
-    - flutter build apk --release
+    - flutter build apk --release --build-number=$CI_BUILD_ID
   artifacts:
     when: on_success
     paths:
     - build/app/outputs/apk/release/app-release.apk
 
+ios:
+  stage: build
+  tags:
+    - ios
+  before_script:
+    - gem install bundler
+  script:
+    - flutter packages get
+    - flutter clean
+    - flutter build ios --release --no-codesign --build-number=$CI_BUILD_ID
+    - cd ios
+    - bundle install
+    - fastlane beta
