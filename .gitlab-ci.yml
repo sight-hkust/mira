@@ -10,7 +10,7 @@ android:
     - android
   stage: build
   before_script:
-    - echo $KEYSTORE | base64 -d > android/keystore.jks
+    - echo $KEYSTORE | base64 --decode > android/keystore.jks
     - echo "storeFile=keystore.jks" > android/key.properties
     - echo "storePassword=$KEYSTORE_PASSWORD" >> android/key.properties
     - echo "keyAlias=$ALIAS" >> android/key.properties
