@@ -6,7 +6,7 @@ variables:
   LANG: "en_US.UTF-8"
 
 android:
-  image: cirrusci/flutter:stable
+  tags: android
   stage: build
   before_script:
     - echo $KEYSTORE | base64 -d > android/keystore.jks
