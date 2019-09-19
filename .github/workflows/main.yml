@@ -10,9 +10,9 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install Flutter SDK from source
       run: |
-        cd /usr/local
+        cd $HOME
         git clone -b stable https://github.com/flutter/flutter.git
-        export PATH="$PATH:/usr/local/flutter/bin"
+        export PATH="$PATH:$HOME/flutter/bin"
     - name: Pre-download development binaries
       run: flutter precache
     - name: Validate Flutter SDK is installed correctly
