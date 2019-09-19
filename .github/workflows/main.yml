@@ -25,5 +25,7 @@ jobs:
         git clone -b stable https://github.com/flutter/flutter.git
     - name: Pre-download development binaries
       run: $HOME/flutter/bin/flutter precache
+    - name: Accept Android Licenses
+      run: echo yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses
     - name: Validate Flutter SDK is installed correctly
       run: $HOME/flutter/bin/flutter doctor
