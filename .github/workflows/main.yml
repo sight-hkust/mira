@@ -15,6 +15,6 @@ jobs:
     - name: Pre-download development binaries
       run: $HOME/flutter/bin/flutter precache
     - name: Accept Android Development Licenses
-      run: yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+      run: yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
     - name: Validate Flutter SDK is installed correctly
       run: $HOME/flutter/bin/flutter doctor
