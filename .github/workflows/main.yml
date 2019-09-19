@@ -3,9 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-  build:
+  build-ios:
     runs-on: macos-latest
-    
     steps:
     - uses: actions/checkout@v1
     - name: Install Flutter SDK from source
@@ -14,7 +13,17 @@ jobs:
         git clone -b stable https://github.com/flutter/flutter.git
     - name: Pre-download development binaries
       run: $HOME/flutter/bin/flutter precache
-    - name: Accept Android Development Licenses
-      run: yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
+    - name: Validate Flutter SDK is installed correctly
+      run: $HOME/flutter/bin/flutter doctor
+  build-android:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Flutter SDK from source
+      run: |
+        cd $HOME
+        git clone -b stable https://github.com/flutter/flutter.git
+    - name: Pre-download development binaries
+      run: $HOME/flutter/bin/flutter precache
     - name: Validate Flutter SDK is installed correctly
       run: $HOME/flutter/bin/flutter doctor
