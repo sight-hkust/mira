@@ -12,8 +12,7 @@ jobs:
       run: |
         cd $HOME
         git clone -b stable https://github.com/flutter/flutter.git
-        export PATH="$PATH:$HOME/flutter/bin"
     - name: Pre-download development binaries
-      run: flutter precache
+      run: $HOME/flutter/bin/flutter precache
     - name: Validate Flutter SDK is installed correctly
-      run: flutter doctor
+      run: $HOME/flutter/bin/flutter doctor
